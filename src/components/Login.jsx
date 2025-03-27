@@ -8,10 +8,10 @@ import { BASE_URL } from '../utils/constants'
 const Login = () => {
 
     const navigate = useNavigate()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('abhi@gmail.com')
+    const [password, setPassword] = useState('Abhishek@1')
+    const [error, setError] = useState('')
     const dispatch = useDispatch()
-    const userData = useSelector(state=> state)
 
     const handleLogin = async()=>{
         try{
@@ -29,7 +29,7 @@ const Login = () => {
         
         }
         catch(err){
-            console.error('Error occurred ', err)
+            setError(err?.response?.data)
         }
     }
     return (
@@ -55,6 +55,7 @@ const Login = () => {
                              />
                         </fieldset>
                     </div>
+                    <p className='text-red-500 flex justify-center'>{error}</p>
                     <div className="card-actions justify-center py-5">
                         <button className="btn btn-primary" onClick={handleLogin}>Login</button>
                     </div>
