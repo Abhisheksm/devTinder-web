@@ -6,7 +6,7 @@ const Profile = () => {
     const userData = useSelector(state=> state?.user)
   return (
     <>
-    {userData && <EditProfile user={userData}/>}
+    {userData && <EditProfile user={userData} />}
     </>
   )
 }

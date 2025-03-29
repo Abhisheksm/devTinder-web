@@ -9,9 +9,9 @@ const EditProfile = ({user}) => {
     const [firstName, setFirstName] = useState(user?.firstName)
     const [lastName, setLastName] = useState(user?.lastName)
     const [photoUrl, setPhotoUrl] = useState(user?.photoUrl)
-    const [about, setAbout] = useState(user?.about)
-    const [age, setAge] = useState(user?.age)
-    const [gender, setGender] = useState(user?.gender)
+    const [about, setAbout] = useState(user?.about || '')
+    const [age, setAge] = useState(user?.age || '')
+    const [gender, setGender] = useState(user?.gender || '')
     const [error, setError] = useState('')
     const [showToast, setShowToast] = useState(false)
 
@@ -28,7 +28,7 @@ const EditProfile = ({user}) => {
             age,
             gender
           },{withCredentials:true})
-          dispatch(addUser(data?.data))
+          dispatch(addUser(data?.data?.data))
           setShowToast(true)
           setTimeout(()=>{
           setShowToast(false)
@@ -98,7 +98,7 @@ const EditProfile = ({user}) => {
                     </div>
                 </div>
             </div>
-            <UserCard user={{firstName, lastName, photoUrl, about, age, gender}}/>
+            <UserCard user={{firstName, lastName, photoUrl, about, age, gender}} isEditProfile/>
     </div>
     {showToast && <div className="toast toast-top toast-center">
   <div className="alert alert-success">
