@@ -84,8 +84,8 @@ const Login = () => {
                                 onChange={(e) => { setEmail(e.target.value) }}
                             />
                             <legend className="fieldset-legend">Password</legend>
-                            <input type="text"
-                                className="password"
+                            <input type="password"
+                                className="input"
                                 placeholder="Enter password.."
                                 value={password}
                                 onChange={(e) => { setPassword(e.target.value) }}
