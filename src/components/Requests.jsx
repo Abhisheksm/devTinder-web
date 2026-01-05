@@ -4,13 +4,15 @@ import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRequests } from '../store/requestSlice'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Requests = () => {
     const dispatch = useDispatch()
     const requests = useSelector(state => state?.requests)
 
     const fetchRequests = async () => {
         try {
-            const data = await axios.get('/api/user/requests/received', { withCredentials: true })
+            const data = await axios.get(API_BASE_URL+'/api/user/requests/received', { withCredentials: true })
             dispatch(addRequests(data?.data?.data))
         }
         catch (err) {
@@ -20,7 +22,7 @@ const Requests = () => {
 
     const reviewRequest = async (id, status) => {
         try {
-            const data = await axios.post(`/api/request/review/${status}/${id}`, {}, { withCredentials: true })
+            const data = await axios.post(`${API_BASE_URL}/api/request/review/${status}/${id}`, {}, { withCredentials: true })
             fetchRequests()
         }
         catch (err) {

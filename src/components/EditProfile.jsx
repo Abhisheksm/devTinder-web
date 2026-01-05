@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import UserCard from './UserCard'
 import axios from 'axios'
-import { BASE_URL } from '../utils/constants'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../store/userSlice'
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user?.firstName)
@@ -20,7 +21,7 @@ const EditProfile = ({ user }) => {
   const updateProfile = async () => {
     setError('')
     try {
-      const data = await axios.patch('/api/profile/edit', {
+      const data = await axios.patch(API_BASE_URL+'/api/profile/edit', {
         firstName,
         lastName,
         about,

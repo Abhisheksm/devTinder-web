@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addUser } from '../store/userSlice'
 import { useNavigate } from 'react-router-dom'
-import { BASE_URL } from '../utils/constants'
 import Loading from './Loading'
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Login = () => {
 
@@ -21,7 +22,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             setLoading(true)
-            const result = await axios.post('/api/login', {
+            const result = await axios.post(API_BASE_URL+'/api/login', {
                 emailId: email,
                 password
             },

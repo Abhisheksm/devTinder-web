@@ -4,12 +4,14 @@ import { BASE_URL } from '../utils/constants'
 import { useDispatch } from 'react-redux'
 import { removeUserFromFeed } from '../store/feedSlice'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const UserCard = ({user, isEditProfile}) => {
     const dispatch = useDispatch()
 
     const handleSendRequest = async (status, id) =>{
         try{
-        const data = await axios.post(`/api/request/send/${status}/${id}`, {}, {withCredentials:true})
+        const data = await axios.post(`${API_BASE_URL}/api/request/send/${status}/${id}`, {}, {withCredentials:true})
         dispatch(removeUserFromFeed(id))
         }
         catch(err)

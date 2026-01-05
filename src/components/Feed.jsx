@@ -5,6 +5,8 @@ import { addFeed } from '../store/feedSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import UserCard from './UserCard'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Feed = () => {
 
     const dispatch = useDispatch()
@@ -12,7 +14,7 @@ const Feed = () => {
 
     const getFeed =async ()=>{
       try{
-        const data = await axios.get('/api/feed',{ withCredentials: true})
+        const data = await axios.get(API_BASE_URL+'/api/feed',{ withCredentials: true})
         dispatch(addFeed(data?.data))
       }
       catch(err)

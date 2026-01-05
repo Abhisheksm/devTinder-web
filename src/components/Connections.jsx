@@ -4,13 +4,15 @@ import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addConnections } from '../store/connectionSlice'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Connections = () => {
     const dispatch = useDispatch()
     const connections = useSelector(state => state?.connections)
 
     const fetchConnections = async () => {
         try {
-            const data = await axios.get('/api/user/connections', { withCredentials: true })
+            const data = await axios.get(API_BASE_URL+'/api/user/connections', { withCredentials: true })
             dispatch(addConnections(data?.data?.data))
         }
         catch (err) {

@@ -6,6 +6,8 @@ import { BASE_URL } from '../utils/constants'
 import { removeUser } from '../store/userSlice'
 import Loading from './Loading'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Navbar = () => {
 
     const [loading, setLoading] = useState(false)
@@ -16,7 +18,7 @@ const Navbar = () => {
     const handleLogout = async() =>{
        try{
         setLoading(true)
-          await axios.post('/api/logout',{},{ withCredentials: true})
+          await axios.post(API_BASE_URL+'/api/logout',{},{ withCredentials: true})
           dispatch(removeUser())
           navigate('/login')
        }
@@ -30,7 +32,7 @@ const Navbar = () => {
     }
 
     if(loading) return <Loading/>
-    
+
     return (
         <div className="navbar bg-base-300 shadow-sm " >
             <div className="flex-1">
