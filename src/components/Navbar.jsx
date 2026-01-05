@@ -1,18 +1,22 @@
 import axios from 'axios'
-import React from 'react'
+import {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
 import { removeUser } from '../store/userSlice'
+import Loading from './Loading'
 
 const Navbar = () => {
+
+    const [loading, setLoading] = useState(false)
 
     const userData = useSelector(state => state?.user)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleLogout = async() =>{
        try{
-          await axios.post(BASE_URL+'/logout',{},{ withCredentials: true})
+        setLoading(true)
+          await axios.post('/api/logout',{},{ withCredentials: true})
           dispatch(removeUser())
           navigate('/login')
        }
@@ -20,7 +24,13 @@ const Navbar = () => {
        {
         console.error(err)
        }
+        finally{
+           setLoading(false)
+        }
     }
+
+    if(loading) return <Loading/>
+    
     return (
         <div className="navbar bg-base-300 shadow-sm " >
             <div className="flex-1">

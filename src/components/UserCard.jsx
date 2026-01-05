@@ -9,7 +9,7 @@ const UserCard = ({user, isEditProfile}) => {
 
     const handleSendRequest = async (status, id) =>{
         try{
-        const data = await axios.post(`${BASE_URL}/request/send/${status}/${id}`, {}, {withCredentials:true})
+        const data = await axios.post(`/api/request/send/${status}/${id}`, {}, {withCredentials:true})
         dispatch(removeUserFromFeed(id))
         }
         catch(err)

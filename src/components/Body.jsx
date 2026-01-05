@@ -14,7 +14,7 @@ const Body = () => {
 
   const fetchUser = async () => {
     try {
-      const data = await axios.get(BASE_URL + '/profile/view', {
+      const data = await axios.get('/api/profile/view', {
         withCredentials: true
       })
       dispatch(addUser(data?.data))
@@ -32,9 +32,17 @@ const Body = () => {
   }, [])
   return (
     <>
-      <Navbar />
-      <Outlet />
-      <Footer />
+    <div>
+       <Navbar className='h-[10vh]'/>
+    </div>
+     
+      <div className='h-[80vh] overflow-y-scroll'>
+<Outlet />
+      </div>
+      <div className='h-[10vh]'>
+<Footer />
+      </div>
+      
     </>
 
   )

@@ -12,7 +12,7 @@ const Feed = () => {
 
     const getFeed =async ()=>{
       try{
-        const data = await axios.get(BASE_URL+'/feed',{ withCredentials: true})
+        const data = await axios.get('/api/feed',{ withCredentials: true})
         dispatch(addFeed(data?.data))
       }
       catch(err)
@@ -29,7 +29,7 @@ const Feed = () => {
 
     if(!feedData?.length) return <h1 className='text-center my-5 text-xl'> No new user found</h1>
   return (
-    feedData && <div className='flex justify-center my-10'>
+    feedData && <div className='flex justify-center mt-3 mb-2'>
         <UserCard user={feedData[0]}/>
     </div>
   )

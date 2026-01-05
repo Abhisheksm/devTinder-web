@@ -10,7 +10,7 @@ const Requests = () => {
 
     const fetchRequests = async () => {
         try {
-            const data = await axios.get(BASE_URL + '/user/requests/received', { withCredentials: true })
+            const data = await axios.get('/api/user/requests/received', { withCredentials: true })
             dispatch(addRequests(data?.data?.data))
         }
         catch (err) {
@@ -20,7 +20,7 @@ const Requests = () => {
 
     const reviewRequest = async (id, status) => {
         try {
-            const data = await axios.post(`${BASE_URL}/request/review/${status}/${id}`, {}, { withCredentials: true })
+            const data = await axios.post(`/api/request/review/${status}/${id}`, {}, { withCredentials: true })
             fetchRequests()
         }
         catch (err) {

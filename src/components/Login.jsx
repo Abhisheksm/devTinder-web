@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '../store/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
+import Loading from './Loading'
 
 const Login = () => {
 
@@ -14,11 +15,13 @@ const Login = () => {
     const [lastName, setLastName] = useState('')
     const [isLoginForm, setIsLoginForm] = useState(true)
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
     const handleLogin = async () => {
         try {
-            const result = await axios.post(BASE_URL + '/login', {
+            setLoading(true)
+            const result = await axios.post('/api/login', {
                 emailId: email,
                 password
             },
@@ -33,11 +36,14 @@ const Login = () => {
         catch (err) {
             setError(err?.response?.data)
         }
+        finally{
+           setLoading(false)
+        }
     }
 
     const handleSignUP = async () => {
         try {
-            const data = await axios.post(BASE_URL + '/signup', {
+            const data = await axios.post('/api/signup', {
                 firstName,
                 lastName,
                 emailId: email,
@@ -51,6 +57,10 @@ const Login = () => {
             setError(err?.response?.data)
         }
     }
+
+    if(loading) return <Loading/>
+
+
     return (
         <div className='flex justify-center my-20'>
             <div className="card bg-base-300 w-96 shadow-sm">
