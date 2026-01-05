@@ -2,9 +2,7 @@ import axios from 'axios'
 import {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { BASE_URL } from '../utils/constants'
 import { removeUser } from '../store/userSlice'
-import Loading from './Loading'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -17,7 +15,6 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const handleLogout = async() =>{
        try{
-        setLoading(true)
           await axios.post(API_BASE_URL+'/api/logout',{},{ withCredentials: true})
           dispatch(removeUser())
           navigate('/login')
@@ -26,12 +23,7 @@ const Navbar = () => {
        {
         console.error(err)
        }
-        finally{
-           setLoading(false)
-        }
     }
-
-    if(loading) return <Loading/>
 
     return (
         <div className="navbar bg-base-300 shadow-sm " >
